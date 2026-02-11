@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "outDir": "./build/",
     "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./build",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "skipLibCheck": true //Mongoose 9.2.0 gives strange type-error. I have to skip it.
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/scripts/**/*.ts", "node_modules"]
+  "include": ["src"],
+  "exclude": ["src/scripts", "node_modules"]
 }
