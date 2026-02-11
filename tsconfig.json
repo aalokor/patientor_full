@@ -10,7 +10,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true //Mongoose was giving strange errors when building. I had to add this.
   },
   "include": ["src"],
   "exclude": ["src/scripts", "node_modules"]
