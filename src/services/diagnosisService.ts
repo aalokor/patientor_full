@@ -1,11 +1,9 @@
-import data from "../../data/diagnoses";
-
+import DiagnosisModel from "../models/diagnoses";
 import { Diagnosis } from "../types";
 
-const diagnosis: Diagnosis[] = data;
-
-const getEntries = (): Diagnosis[] => {
-  return diagnosis;
+const getEntries = async (): Promise<Diagnosis[]> => {
+  const entries = await DiagnosisModel.find({}).lean();
+  return entries;
 };
 
 export default {
