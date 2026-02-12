@@ -3,6 +3,7 @@ import diagnosesRouter from "./routes/diagnosis";
 import patientsRouter from "./routes/patients";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 
@@ -29,9 +30,16 @@ app.get("/api/ping", (_req, res) => {
   console.log("someone pinged here");
   res.send("pong");
 });
-
 app.use("/api/diagnosis", diagnosesRouter);
 app.use("/api/patients", patientsRouter);
+
+const frontendPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendPath));
+
+//insane path here because express router was being a bully
+app.get(/^\/.*$/, (_req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
