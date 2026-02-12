@@ -9,7 +9,7 @@
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test:e2e": "playwright test",
-    "test:e2e:ci": "npx start-server-and-test dev http://127.0.0.1:5173 \"npx playwright test\"",
+    "test:e2e:ci": "npx start-server-and-test dev http://127.0.0.1:5173 \"playwright test\"",
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
