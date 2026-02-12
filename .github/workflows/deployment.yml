@@ -25,10 +25,10 @@ jobs:
         run: npm install
       - name: Lint backend
         run: npm run lint
-      - name: Build backend
-        run: npm run tsc
       - name: Test backend
         run: npm run test
+      - name: Build backend
+        run: npm run tsc
 
       # Frontend
       - name: Install frontend dependencies
