@@ -1,11 +1,14 @@
 import DiagnosisModel from "../models/diagnoses";
 import { Diagnosis } from "../types";
 
-const getEntries = async (): Promise<Diagnosis[]> => {
-  const entries = await DiagnosisModel.find({}).lean();
-  return entries;
+interface DiagnosisModelTest {
+  find: (filter?: object) => { lean: () => Promise<Diagnosis[]> };
+}
+
+const getEntries = async (
+  model: DiagnosisModelTest = DiagnosisModel as unknown as DiagnosisModelTest,
+): Promise<Diagnosis[]> => {
+  return model.find({}).lean();
 };
 
-export default {
-  getEntries,
-};
+export default { getEntries };
