@@ -25,6 +25,8 @@ jobs:
         run: npm install
       - name: Lint backend
         run: npm run lint
+      - name: Test backend
+        run: npm run test
       - name: Build backend
         run: npm run tsc
 
