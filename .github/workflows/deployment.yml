@@ -46,6 +46,12 @@ jobs:
       - name: Build frontend
         working-directory: ./frontend
         run: npm run build
+      - name: trigger deployment
+        if: >
+          github.event_name == 'push' &&
+          !contains(github.event.head_commit.message, '#skip')
+        run: |
+          curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
