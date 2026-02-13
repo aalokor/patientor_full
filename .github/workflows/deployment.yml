@@ -49,6 +49,33 @@ jobs:
           github.event_name == 'push' &&
           !contains(github.event.head_commit.message, '#skip')
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_URL }}"
+      - name: Notify on success
+        if: > 
+          success() && 
+          github.event_name == 'push' && 
+          !contains(github.event.head_commit.message, '#skip')
+        uses: tsickert/discord-webhook@v7.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          username: "Full Stack Patientor"
+          content: "A new version of Patientor deployed"
+          embed-title: "Success"
+          embed-description: A new version of Patientor deployed to ${{ secrets.DEPLOYMENT_URL }}.
+          embed-footer-text: "Severity: Informational"
+          embed-timestamp: ${{ github.event.head_commit.timestamp }}
+          embed-color: 3066993
+      - name: Notify on failure
+        if: failure()
+        uses: tsickert/discord-webhook@v7.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          username: "Full Stack Patientor"
+          content: "Patientor deployment failed"
+          embed-title: "Error"
+          embed-description: A commit [`${{ github.sha }}`](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}) by **${{ github.actor }}** broke the build.
+          embed-footer-text: "Severity: Error"
+          embed-timestamp: ${{ github.event.head_commit.timestamp }}
+          embed-color: 15158332
 
   tag_release:
     needs: [deployment_pipeline]
