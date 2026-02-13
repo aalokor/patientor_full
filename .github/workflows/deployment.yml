@@ -37,15 +37,10 @@ jobs:
       - name: Lint frontend
         working-directory: ./frontend
         run: npm run lint
-      #- name: Install Playwright Browsers
-        #working-directory: ./frontend
-        #run: npx playwright install --with-deps
-      #- name: e2e tests
-        #working-directory: ./frontend
-        #run: npm run test:e2e
-      #- name: Run e2e tests
-        #working-directory: ./frontend
-        #run: npm run test:e2e:ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run e2e tests
+        run: npm run test:e2e
       - name: Build frontend
         working-directory: ./frontend
         run: npm run build
