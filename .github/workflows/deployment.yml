@@ -37,13 +37,13 @@ jobs:
       - name: Lint frontend
         working-directory: ./frontend
         run: npm run lint
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run e2e tests
         run: npm run test:e2e
-      - name: Build frontend
-        working-directory: ./frontend
-        run: npm run build
       - name: Trigger deployment
         if: >
           github.event_name == 'push' &&
